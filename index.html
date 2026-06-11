@@ -607,6 +607,221 @@ body{background:
 .orb.o3{width:180px;height:180px;left:45%;top:74vh;animation-duration:20s}
 @keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.5}50%{transform:translate3d(0,-20px,0) scale(1.06);opacity:.82}}
 
+
+/* ===== DUA BUTTON + MODAL (EmailJS) ===== */
+#duaBtn{
+  position:fixed;
+  left:18px;
+  bottom:18px;
+  z-index:260;
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  border:1px solid rgba(201,168,76,.32);
+  background:rgba(201,168,76,.12);
+  color:var(--gold2);
+  display:none;
+  place-items:center;
+  font-size:18px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 35px rgba(0,0,0,.28);
+  transition:all .6s cubic-bezier(.34,1.2,.64,1);
+  white-space:nowrap;
+  overflow:hidden;
+  font-family:'Cinzel',serif;
+  letter-spacing:2px;
+}
+#duaBtn:hover{background:rgba(201,168,76,.22)}
+#duaBtn.pill-mode{
+  width:auto;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:33px;
+  padding:0 28px;
+  height:50px;
+  font-size:clamp(11px,2.5vw,13px);
+  letter-spacing:3px;
+  border-color:rgba(201,168,76,.55);
+  background:rgba(5,25,12,.82);
+  box-shadow:0 0 28px rgba(201,168,76,.2), 0 10px 35px rgba(0,0,0,.4);
+  animation:duaPulse 3s ease-in-out infinite;
+}
+@keyframes duaPulse{
+  0%,100%{box-shadow:0 0 28px rgba(201,168,76,.2),0 10px 35px rgba(0,0,0,.4)}
+  50%{box-shadow:0 0 42px rgba(201,168,76,.45),0 10px 35px rgba(0,0,0,.4)}
+}
+
+#duaModal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(1,8,3,.75);
+  backdrop-filter:blur(18px);
+  opacity:0;
+  transition:opacity .4s ease;
+}
+#duaModal.open{display:flex;opacity:0}
+#duaModal.visible{opacity:1}
+
+.dua-card{
+  width:min(520px,100%);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:28px;
+  background:linear-gradient(160deg,rgba(7,31,14,.96),rgba(3,20,8,.98));
+  box-shadow:0 32px 80px rgba(0,0,0,.6), 0 0 60px rgba(201,168,76,.08);
+  padding:32px 26px 28px;
+  position:relative;
+  transform:translateY(24px) scale(.97);
+  transition:transform .45s cubic-bezier(.34,1.2,.64,1);
+}
+#duaModal.visible .dua-card{transform:none}
+.dua-card::before{
+  content:'';
+  position:absolute;
+  inset:10px;
+  border:1px solid rgba(201,168,76,.06);
+  border-radius:20px;
+  pointer-events:none;
+}
+.dua-close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  background:none;
+  border:none;
+  color:var(--dim);
+  font-size:22px;
+  cursor:pointer;
+  line-height:1;
+  transition:color .2s;
+}
+.dua-close:hover{color:var(--gold2)}
+.dua-header{text-align:center;margin-bottom:18px}
+.dua-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(11px,2.5vw,13px);
+  letter-spacing:5px;
+  color:var(--gold2);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.dua-arabic-display{
+  font-family:'Amiri',serif;
+  font-size:clamp(18px,4.5vw,24px);
+  color:var(--gold2);
+  text-align:center;
+  line-height:1.8;
+  text-shadow:0 0 20px rgba(201,168,76,.25);
+  margin:10px 0 4px;
+  direction:rtl;
+}
+.dua-cycle-btn{
+  background:none;
+  border:1px solid rgba(201,168,76,.25);
+  color:var(--dim);
+  font-family:'Cinzel',serif;
+  font-size:clamp(9px,2vw,10px);
+  letter-spacing:3px;
+  padding:6px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  margin-top:10px;
+  transition:all .2s;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+.dua-cycle-btn:hover{border-color:rgba(201,168,76,.5);color:var(--gold2)}
+.dua-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);
+  margin:18px 0;
+}
+.dua-label{
+  font-family:'Cinzel',serif;
+  font-size:clamp(9px,2vw,10px);
+  letter-spacing:4px;
+  color:var(--dim);
+  margin-bottom:8px;
+  text-transform:uppercase;
+}
+.dua-textarea{
+  width:100%;
+  background:rgba(10,40,18,.6);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:14px;
+  color:var(--ink);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(15px,3.5vw,17px);
+  line-height:1.75;
+  padding:14px 16px;
+  resize:none;
+  height:110px;
+  outline:none;
+  transition:border-color .2s;
+}
+.dua-textarea:focus{border-color:rgba(201,168,76,.45)}
+.dua-name-input{
+  width:100%;
+  background:rgba(10,40,18,.6);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:14px;
+  color:var(--ink);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(15px,3.5vw,17px);
+  padding:12px 16px;
+  outline:none;
+  transition:border-color .2s;
+  margin-top:10px;
+}
+.dua-name-input:focus{border-color:rgba(201,168,76,.45)}
+.dua-name-input::placeholder,.dua-textarea::placeholder{color:rgba(196,164,114,.4)}
+.dua-send-btn{
+  width:100%;
+  margin-top:16px;
+  padding:16px;
+  border-radius:999px;
+  border:1px solid rgba(201,168,76,.45);
+  background:rgba(201,168,76,.12);
+  color:var(--gold2);
+  font-family:'Cinzel',serif;
+  font-size:clamp(11px,2.5vw,13px);
+  letter-spacing:4px;
+  cursor:pointer;
+  transition:all .25s;
+  box-shadow:0 8px 28px rgba(0,0,0,.2);
+}
+.dua-send-btn:hover{background:rgba(201,168,76,.22);box-shadow:0 0 28px rgba(201,168,76,.2)}
+.dua-send-btn:disabled{opacity:.5;cursor:not-allowed}
+.dua-status{
+  text-align:center;
+  margin-top:12px;
+  font-family:'Cinzel',serif;
+  font-size:clamp(10px,2.5vw,12px);
+  letter-spacing:3px;
+  min-height:20px;
+  transition:color .3s;
+}
+.dua-status.success{color:#7ecf9a}
+.dua-status.error{color:#e88a8a}
+.heart-burst{
+  position:fixed;
+  pointer-events:none;
+  z-index:400;
+  font-size:22px;
+  animation:heartFloat 1.8s ease-out forwards;
+}
+@keyframes heartFloat{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(-120px) scale(1.4)}
+}
+
+
 /* Responsive */
 @media (min-width:640px){
   .countdown{grid-template-columns:repeat(4,1fr)}
@@ -629,6 +844,22 @@ body{background:
   .entry-doors{left:7%;right:7%}
 }
 </style>
+
+<script>
+window.addEventListener("load", function () {
+  var s = document.createElement("script");
+  s.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+  s.onload = function () {
+    try {
+      emailjs.init("0R6A_n_9tF5egMgdG");
+    } catch (e) {
+      console.warn("EmailJS init failed", e);
+    }
+  };
+  document.head.appendChild(s);
+});
+</script>
+
 </head>
 <body>
 <!--
@@ -643,6 +874,27 @@ body{background:
   <source src="music.m4a" type="audio/mpeg">
 </audio>
 <button id="musicBtn" aria-label="Toggle music" title="Toggle music" style="display:none">🎵</button>
+
+<button id="duaBtn" aria-label="Send a Dua">🤲</button>
+
+<!-- DUA MODAL -->
+<div id="duaModal" role="dialog" aria-modal="true" aria-label="Send a Dua">
+  <div class="dua-card">
+    <button class="dua-close" id="duaClose" aria-label="Close">✕</button>
+    <div class="dua-header">
+      <div class="dua-title">✦ Send a Dua ✦</div>
+      <div class="dua-arabic-display" id="duaArabic"></div>
+      <button class="dua-cycle-btn" id="duaCycleBtn">✦ NEXT DUA ✦</button>
+    </div>
+    <div class="dua-divider"></div>
+    <div class="dua-label">Your Blessing</div>
+    <textarea class="dua-textarea" id="duaText" placeholder="Edit the dua or write your own blessing..."></textarea>
+    <input class="dua-name-input" id="duaName" type="text" placeholder="Your name (optional)" maxlength="60" />
+    <button class="dua-send-btn" id="duaSendBtn">✦ SEND YOUR BLESSING ✦</button>
+    <div class="dua-status" id="duaStatus"></div>
+  </div>
+</div>
+
 <canvas id="bg"></canvas>
 <canvas id="stars"></canvas>
 <canvas id="comets"></canvas>
@@ -801,7 +1053,7 @@ body{background:
             <div class="scratch-tag">NIKAH</div>
             <span class="scratch-date">6 September</span>
             <div class="scratch-sub">2026 — SUNDAY</div>
-            <div class="revealed-text" id="revealedText">✦ THE DATE WAS ALWAYS HERE ✦</div>
+            <div class="revealed-text" id="revealedText">THE DATE WAS ALWAYS HERE </div>
           </div>
           <canvas id="scratchCanvas"></canvas>
         </div>
@@ -912,7 +1164,7 @@ body{background:
     <div class="wrap">
       
       <div class="section-title reveal-blur">COUNTING THE MOMENTS</div>
-      <div class="section-sub reveal">Until the Nikah on SUNDAY, 6 September 2026</div>
+      <div class="section-sub reveal">Until the Nikah <br>on SUNDAY, 6 September 2026</div>
       <div class="countdown reveal-scale">
         <div class="unit"><div class="num" id="d">--</div><div class="lbl">DAYS</div></div>
         <div class="unit"><div class="num" id="h">--</div><div class="lbl">HOURS</div></div>
@@ -1277,6 +1529,153 @@ body{background:
   canvas.addEventListener('touchend',()=>drawing=false);
   window.addEventListener('resize',resizeScratch);
   setTimeout(resizeScratch,350);
+  /* ---- DUA MODAL (EmailJS) ---- */
+  const duaBtn = document.getElementById('duaBtn');
+  const duaModal = document.getElementById('duaModal');
+  const duaClose = document.getElementById('duaClose');
+  const duaArabic = document.getElementById('duaArabic');
+  const duaText = document.getElementById('duaText');
+  const duaName = document.getElementById('duaName');
+  const duaSendBtn = document.getElementById('duaSendBtn');
+  const duaStatus = document.getElementById('duaStatus');
+  const duaCycleBtn = document.getElementById('duaCycleBtn');
+
+  const duas = [
+    { ar: 'بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ', en: 'May Allah bless you both, bestow His blessings upon you, and unite you in goodness.' },
+    { ar: 'اللَّهُمَّ أَلِّفْ بَيْنَ قُلُوبِهِمَا كَمَا أَلَّفْتَ بَيْنَ آدَمَ وَحَوَّاءَ', en: 'O Allah, join their hearts as You joined Adam and Hawwa.' },
+    { ar: 'رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ', en: 'Our Lord, grant us from among our spouses and offspring comfort to our eyes.' },
+    { ar: 'اللَّهُمَّ اجْعَلْ هَذَا الزَّوَاجَ مُبَارَكًا وَمَيْمُونًا', en: 'O Allah, make this marriage blessed and auspicious.' },
+    { ar: 'اللَّهُمَّ بَارِكْ لَهُمَا فِي حَيَاتِهِمَا وَذُرِّيَّتِهِمَا', en: 'O Allah, bless them in their life together and in their offspring.' },
+    { ar: 'جَزَاكَ اللَّهُ خَيْرًا وَبَارَكَ فِيكَ', en: 'May Allah reward you with goodness and bless you.' },
+    { ar: 'اللَّهُمَّ اجْمَعْ بَيْنَهُمَا عَلَى الخَيْرِ وَالسَّعَادَةِ', en: 'O Allah, bring them together upon goodness and happiness.' },
+    { ar: 'بَارَكَ اللَّهُ لَكُمَا وَأَدَامَ اللَّهُ مَحَبَّتَكُمَا', en: 'May Allah bless you both and keep your love eternal.' },
+    { ar: 'اللَّهُمَّ اجْعَلْ بَيْنَهُمَا مَوَدَّةً وَرَحْمَةً', en: 'O Allah, place between them affection and mercy.' },
+    { ar: 'رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي', en: 'My Lord, make me an establisher of prayer, and from my descendants.' },
+    { ar: 'اللَّهُمَّ بَارِكْ لَهُمَا وَاغْفِرْ لَهُمَا وَارْحَمْهُمَا', en: 'O Allah, bless them, forgive them, and have mercy on them.' },
+    { ar: 'اللَّهُمَّ اجْعَلْ عَقْدَهُمَا عَقْدًا مُبَارَكًا وَمَيْمُونًا', en: 'O Allah, make their bond a blessed and fortunate one.' },
+    { ar: 'اللَّهُمَّ ارْزُقْهُمَا الصِّحَّةَ وَالسَّعَادَةَ وَالذُّرِّيَّةَ الصَّالِحَةَ', en: 'O Allah, grant them health, happiness, and righteous children.' },
+    { ar: 'اللَّهُمَّ اجْعَلْ دَارَهُمَا دَارَ رَحْمَةٍ وَسَكَنٍ وَمَوَدَّةٍ', en: 'O Allah, make their home a house of mercy, tranquility, and love.' },
+    { ar: 'اللَّهُمَّ اكْتُبْهُمَا مِنَ السُّعَدَاءِ فِي الدُّنْيَا وَالآخِرَةِ', en: 'O Allah, write them among the blessed in this world and the next.' },
+    { ar: 'اللَّهُمَّ احْفَظْهُمَا وَاحْفَظْ أَسْرَتَهُمَا مِنْ كُلِّ سُوءٍ', en: 'O Allah, protect them and their family from all harm.' },
+    { ar: 'اللَّهُمَّ اجْعَلْ حَيَاتَهُمَا مَلِيئَةً بِالبَرَكَةِ وَالنِّعْمَةِ', en: 'O Allah, fill their life with blessings and bounty.' }
+  ];
+
+  let duaIndex = 0;
+  function setDua(idx){
+    duaIndex = ((idx % duas.length) + duas.length) % duas.length;
+    duaArabic.textContent = duas[duaIndex].ar;
+    duaText.value = duas[duaIndex].ar + '\n\n' + duas[duaIndex].en;
+  }
+  setDua(0);
+
+  duaCycleBtn.addEventListener('click', () => {
+    setDua(duaIndex + 1);
+  });
+
+  function showDuaBtn(){
+    duaBtn.style.display = 'grid';
+  }
+
+  // Show dua button after entry opens
+  const _origShowDua = document.getElementById('entry');
+  if(_origShowDua){
+    _origShowDua.addEventListener('click', () => {
+      setTimeout(showDuaBtn, 2500);
+    }, {once:true});
+  }
+
+  // Watch scroll — switch to pill after celebrations section
+  const celebSection = document.querySelector('.cards') ? document.querySelector('.cards').closest('.section') : null;
+  let pillMode = false;
+  scroller.addEventListener('scroll', () => {
+    if(!celebSection) return;
+    const rect = celebSection.getBoundingClientRect();
+    const pastCelebrations = rect.bottom < 0;
+    if(pastCelebrations && !pillMode){
+      pillMode = true;
+      duaBtn.classList.add('pill-mode');
+      duaBtn.innerHTML = '✦ SEND A DUA ✦';
+    } else if(!pastCelebrations && pillMode){
+      pillMode = false;
+      duaBtn.classList.remove('pill-mode');
+      duaBtn.innerHTML = '🤲';
+    }
+  }, {passive:true});
+
+  // Open modal
+  duaBtn.addEventListener('click', openDuaModal);
+  function openDuaModal(){
+    duaStatus.textContent = '';
+    duaStatus.className = 'dua-status';
+    duaModal.style.display = 'flex';
+    duaModal.classList.add('open');
+    requestAnimationFrame(() => requestAnimationFrame(() => duaModal.classList.add('visible')));
+  }
+
+  function closeDuaModal(){
+    duaModal.classList.remove('visible');
+    setTimeout(() => {
+      duaModal.classList.remove('open');
+      duaModal.style.display = 'none';
+    }, 400);
+  }
+  duaClose.addEventListener('click', closeDuaModal);
+  duaModal.addEventListener('click', e => { if(e.target === duaModal) closeDuaModal(); });
+
+  // Send dua via EmailJS
+  duaSendBtn.addEventListener('click', async () => {
+    const message = duaText.value.trim();
+    const name = duaName.value.trim() || 'A Beloved Guest';
+    if(!message){
+      duaStatus.textContent = 'Please write a blessing first.';
+      duaStatus.className = 'dua-status error';
+      return;
+    }
+
+    duaSendBtn.disabled = true;
+    duaSendBtn.textContent = '✦ SENDING... ✦';
+    duaStatus.textContent = '';
+
+    const params = { from_name: name, message: message, name: name, email: '' };
+
+    try {
+      if(typeof emailjs === 'undefined') throw new Error('EmailJS not loaded');
+      await emailjs.send('service_ankfxao', 'template_1yagxpn', params);
+
+      duaStatus.textContent = '✦ YOUR BLESSING HAS BEEN SENT ✦';
+      duaStatus.className = 'dua-status success';
+      duaSendBtn.textContent = '✦ SENT WITH LOVE ✦';
+      spawnHearts();
+      setTimeout(closeDuaModal, 2800);
+    } catch(err){
+      duaStatus.textContent = 'Something went wrong. Please try again.';
+      duaStatus.className = 'dua-status error';
+      duaSendBtn.disabled = false;
+      duaSendBtn.textContent = '✦ SEND YOUR BLESSING ✦';
+      console.error(err);
+    }
+  });
+
+  function spawnHearts(){
+    const rect = duaSendBtn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top;
+    const emojis = ['💛','✨','🤍','💫','🌙','💚'];
+    for(let i=0;i<8;i++){
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'heart-burst';
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.left = (cx + (Math.random() - 0.5) * 80) + 'px';
+        h.style.top = cy + 'px';
+        h.style.animationDelay = (Math.random() * 0.3) + 's';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 2200);
+      }, i * 80);
+    }
+  }
+
+
 })();
 </script>
 </body>
